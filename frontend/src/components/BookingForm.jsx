@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchAvailability, createBooking, payDeposit, cancelBooking } from '../mocks/bookingApi'
 
+// REQ-FN-008, REQ-FN-041, REQ-IF-001, REQ-SEC-004
 export default function BookingForm() {
   const [slots, setSlots] = useState([])
   const [selectedSlot, setSelectedSlot] = useState('')

@@ -21,7 +21,7 @@
 - ไฟล์ที่แตะ: backend/app/models/*.py, backend/app/schemas/*.py, db/migrations/, backend/app/services/security.py
 - ต้องทำหลัง: T-01
 - เสร็จเมื่อ: job, timeslot, payment, refund และ history state model พร้อมกำหนดสถานะและข้อมูล PII อย่างชัดเจน
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-03 สร้าง API ค้นหาช่างว่างและแสดงราคา/เงื่อนไข
 - รองรับ: REQ-FN-008
@@ -29,7 +29,7 @@
 - ไฟล์ที่แตะ: backend/app/api/booking.py, backend/app/services/availability.py, backend/app/schemas/booking.py
 - ต้องทำหลัง: T-02
 - เสร็จเมื่อ: API คืนช่างที่ว่างภายใน 7 วัน พร้อมข้อมูลประเภทงาน/ที่อยู่/ช่วงเวลาและราคามัดจำที่เห็นได้จากลูกค้า
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-04 สร้างล็อกช่วงเวลาและหมดอายุอัตโนมัติ
 - รองรับ: REQ-FN-041
@@ -37,7 +37,7 @@
 - ไฟล์ที่แตะ: backend/app/services/booking_lock.py, backend/app/tasks/lock_expiry.py, db/migrations/...
 - ต้องทำหลัง: T-03
 - เสร็จเมื่อ: ระบบล็อกช่วงเวลาไว้ระหว่างขั้นยืนยันและปลดล็อกอัตโนมัติเมื่อหมดอายุแล้วโดยไม่ให้ซ้อนทับ
-- สถานะ: รอ Q-18
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-05 สร้างกระบวนการชำระมัดจำผ่าน Payment Gateway
 - รองรับ: REQ-IF-001, REQ-IF-005, REQ-CON-003
@@ -45,7 +45,7 @@
 - ไฟล์ที่แตะ: backend/app/services/payment.py, backend/app/integrations/payment_gateway.py, backend/app/api/checkout.py
 - ต้องทำหลัง: T-04
 - เสร็จเมื่อ: ระบบ authorize แล้ว capture มัดจำผ่าน gateway ได้ และเมื่อ timeout จึงเรียก status inquiry ด้วย reference เดิม
-- สถานะ: รอ Q-19
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-06 สร้างงานยืนยันแล้วและ lifecycle ของ Job
 - รองรับ: REQ-DAT-002, REQ-FN-012
@@ -53,7 +53,7 @@
 - ไฟล์ที่แตะ: backend/app/services/job_creation.py, backend/app/models/job.py, backend/app/repositories/job_repository.py
 - ต้องทำหลัง: T-05
 - เสร็จเมื่อ: หลังชำระสำเร็จระบบสร้างงานในสถานะยืนยันแล้ว และเก็บประวัติการเปลี่ยนสถานะ 24 เดือนตาม MD-STM-01
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-07 สร้างการแจ้งลูกค้าและช่างหลังสร้างงาน
 - รองรับ: REQ-FN-012, REQ-IF-002
@@ -61,7 +61,7 @@
 - ไฟล์ที่แตะ: backend/app/services/notifications.py, backend/app/integrations/sms.py, backend/app/events/job_created.py
 - ต้องทำหลัง: T-06
 - เสร็จเมื่อ: แจ้งทั้งสองฝ่ายภายใน 60 วินาทีหลังสร้างงานและมี log/trace สำหรับการส่งแจ้งเตือน
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-08 จัดการสิทธิ์การเข้าถึงข้อมูล PII และข้อมูลตำแหน่ง
 - รองรับ: REQ-SEC-004, REQ-PRV-002
@@ -69,7 +69,7 @@
 - ไฟล์ที่แตะ: backend/app/security/access_control.py, backend/app/validators/pii.py, backend/app/services/customer_profile.py
 - ต้องทำหลัง: T-02
 - เสร็จเมื่อ: ช่างเห็นเบอร์ลูกค้าเฉพาะช่วงเวลาที่กำหนดเท่านั้น และไม่เก็บ/ส่งข้อมูล PII ลง log หรือออกนอกระบบตามกฎ
-- สถานะ: รอ Q-22
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-09 สร้างกระบวนการคืนมัดจำตาม BR-01
 - รองรับ: REQ-BR-001
@@ -77,7 +77,7 @@
 - ไฟล์ที่แตะ: backend/app/services/refund.py, backend/app/rules/refund_policy.py, backend/app/api/cancel_booking.py
 - ต้องทำหลัง: T-06
 - เสร็จเมื่อ: กระบวนการยกเลิกและคืนมัดจำให้สอดคล้องกับ decision table BR-01 และมีผลลัพธ์ที่ชัดเจนต่อลูกค้า
-- สถานะ: รอ Q-14
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-10 สร้างหน้า booking แบบ mock API
 - รองรับ: REQ-FN-008, REQ-FN-041, REQ-IF-001, REQ-SEC-004
@@ -85,7 +85,7 @@
 - ไฟล์ที่แตะ: frontend/src/pages/BookingPage.jsx, frontend/src/components/BookingForm.jsx, frontend/src/mocks/bookingApi.js
 - ต้องทำหลัง: ไม่มี
 - เสร็จเมื่อ: หน้า booking ทำงานได้แบบ mock และให้ลูกค้าเลือกช่าง/ช่วงเวลา/เงื่อนไขก่อนยืนยันหรือชำระ
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## T-11 ต่อหน้าจอกับ API จริง และตรวจประสิทธิภาพ/AC ครบชุด
 - รองรับ: REQ-QA-003 และทุก AC ใน spec
@@ -93,7 +93,7 @@
 - ไฟล์ที่แตะ: frontend/src/integration/bookingFlow.test.jsx, backend/tests/test_booking_flow.py, frontend/src/pages/BookingPage.integration.jsx
 - ต้องทำหลัง: T-03, T-05, T-07, T-08, T-09, T-10
 - เสร็จเมื่อ: ทุก AC ผ่าน และประเมิน p95 ของค้นหา/ยืนยันได้ไม่เกิน 2 วินาทีสำหรับผู้ใช้ 500 คนพร้อมกัน
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ## ตารางตรวจความครบ AC
 

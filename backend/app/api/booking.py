@@ -14,9 +14,18 @@ router = APIRouter(prefix='/api/v1')
 _BOOKINGS: dict[str, Booking] = {}
 
 
+# REQ-FN-008
 @router.get('/availability')
-def get_booking_availability(service_type: str = 'repair', date: str | None = None):
-    return {'slots': [slot.model_dump(mode='json') for slot in get_available_slots(service_type, date=date)]}
+def get_booking_availability(service_type: str = 'repair', date: str | None = None, address_id: str | None = None):
+    slots = get_available_slots(service_type, date=date, days_ahead=7)
+    return {
+        'service_type': service_type,
+        'address_id': address_id or 'default-address',
+        'available_from': slots[0].start.isoformat() if slots else None,
+        'available_to': slots[-1].end.isoformat() if slots else None,
+        'count': len(slots),
+        'slots': [slot.model_dump(mode='json') for slot in slots],
+    }
 
 
 @router.post('/bookings', response_model=BookingResponse)

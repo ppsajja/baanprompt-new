@@ -1,3 +1,4 @@
+// REQ-FN-008, REQ-FN-041, REQ-IF-001, REQ-BR-001
 export const mockTechnicians = [
   { id: 'tech-1', name: 'ช่าง A', rating: 4.9, serviceType: 'repair' },
   { id: 'tech-2', name: 'ช่าง B', rating: 4.8, serviceType: 'repair' },
@@ -10,10 +11,12 @@ export const mockAvailableSlots = [
   { slotId: 'slot-3', technicianId: 'tech-3', start: '2026-10-05T11:00:00', end: '2026-10-05T12:00:00', available: true },
 ]
 
+// REQ-FN-008
 export async function fetchAvailability() {
   return { slots: mockAvailableSlots }
 }
 
+// REQ-FN-041, REQ-IF-001
 export async function createBooking(payload) {
   return {
     id: 'booking-0001',
@@ -22,6 +25,7 @@ export async function createBooking(payload) {
   }
 }
 
+// REQ-IF-001
 export async function payDeposit(payload) {
   return {
     bookingId: payload.bookingId,
@@ -32,6 +36,7 @@ export async function payDeposit(payload) {
   }
 }
 
+// REQ-BR-001
 export async function cancelBooking(bookingId) {
   return {
     bookingId,

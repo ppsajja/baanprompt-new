@@ -1,5 +1,6 @@
 import BookingForm from '../components/BookingForm'
 
+// REQ-FN-008, REQ-FN-041, REQ-IF-001, REQ-SEC-004
 export default function BookingPage() {
   return (
     <main className="min-h-screen bg-slate-100 px-4 py-10 text-slate-900">

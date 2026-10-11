@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 
 
+# REQ-SEC-004, REQ-PRV-002
 def can_technician_view_customer_phone(job_time: datetime | None, current_time: datetime | None = None) -> bool:
     if job_time is None:
         return False
